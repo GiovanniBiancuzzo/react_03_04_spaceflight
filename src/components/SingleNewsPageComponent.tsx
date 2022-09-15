@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
-import { Button, Card, CardDeck, Col, Container } from "react-bootstrap";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Button, Card, Container, Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { News } from "../types/newsInterface";
-
-interface SingleNews {
-    news: News;
-}
+import format from "date-fns/format";
 
 const SingleNewsPageComponent = () => {
     const params = useParams();
 
-    const [singleNews, setSingleNews] = useState<News>();
+    const [singleNews, setSingleNews] = useState<News | null>(null);
 
     const fetchSingleNews = () => {
-        fetch(`https://api.spaceflightnewsapi.net/v3/articles/${params.id}`)
+        fetch(`${process.env.REACT_APP_ENDPOINT_API}articles/${params.id}`)
             .then((res) => res.json())
             .then((data) => setSingleNews(data))
             .catch((error) => console.log(error));
@@ -21,25 +18,42 @@ const SingleNewsPageComponent = () => {
 
     useEffect(() => {
         fetchSingleNews();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
-        <Container fluid>
-            <Card>
-                <Card.Header>{singleNews!.title}</Card.Header>
-                <Card.Img variant="top" src={singleNews!.imageUrl} />
-                <Card.Body>
-                    <Card.Title>{singleNews!.newsSite}</Card.Title>
-                    <Card.Text>{singleNews!.summary}</Card.Text>
-                </Card.Body>
-                {/* <Card.Footer>
-                    <small className="text-muted">
-                        {singlesingleNews!.updatedAt}
-                    </small>
-                </Card.Footer> */}
-                <Link to={singleNews!.url}>Go to the news</Link>
-            </Card>
-        </Container>
+        <>
+            {singleNews ? (
+                <Container className="p-4">
+                    <Card>
+                        <Card.Header>
+                            <h2>{singleNews.title}</h2>
+                        </Card.Header>
+                        <Card.Img variant="top" src={singleNews.imageUrl} />
+                        <Card.Body>
+                            <Card.Title>
+                                Fonte: {singleNews.newsSite}
+                            </Card.Title>
+                            <Card.Text>{singleNews.summary}</Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <em>
+                                <small className="text-muted">
+                                    Last updated at:{" "}
+                                    {format(
+                                        new Date(singleNews.updatedAt),
+                                        "pppp"
+                                    )}
+                                </small>
+                            </em>
+                        </Card.Footer>
+                        <Button href={singleNews.url}>Go to the news</Button>
+                    </Card>
+                </Container>
+            ) : (
+                <Spinner animation="grow" variant="warning" />
+            )}
+        </>
     );
 };
 

@@ -6,33 +6,45 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NewsPageComponent from "./components/NewsPageComponent";
 import JumbotronComponent from "./components/JumbotronComponent";
 import SingleNewsPageComponent from "./components/SingleNewsPageComponent";
+import NotFoundComponent from "./components/NotFoundComponent";
 
 function App() {
     return (
         <BrowserRouter>
             <div className="App">
                 <header className="App-header">
-                    {/* <NavbarComponent /> */}
+                    <NavbarComponent />
                     <JumbotronComponent />
-                    {
-                        //todo: aggiungi una props dal navigate per aggiornae il contenuto del jumbotron
-                    }{" "}
-                    <div className="newsBackground">
-                        <Routes>
-                            <Route
-                                path="/"
-                                element={<NewsPageComponent />}
-                            ></Route>
-                            <Route
-                                path="/:id"
-                                element={<SingleNewsPageComponent />}
-                            ></Route>
-                            {
-                                //todo: aggiungi altre pagine blogs, ecc
-                            }
-                        </Routes>
-                    </div>
                 </header>
+                {
+                    //todo: aggiungi una props dal navigate per aggiornare il contenuto del jumbotron
+                }{" "}
+                <div className="newsBackground">
+                    <Routes>
+                        <Route path="/" element={<NewsPageComponent />}></Route>
+                        <Route
+                            path="/news"
+                            element={<NewsPageComponent />}
+                        ></Route>
+                        <Route
+                            path="/news/:id"
+                            element={<SingleNewsPageComponent />}
+                        ></Route>
+                        <Route
+                            path="/blog"
+                            element={<NewsPageComponent />}
+                        ></Route>
+                        <Route
+                            path="/reports"
+                            element={<NewsPageComponent />}
+                        ></Route>
+                        <Route
+                            path="/info"
+                            element={<NewsPageComponent />}
+                        ></Route>
+                        <Route path="*" element={<NotFoundComponent />}></Route>
+                    </Routes>
+                </div>
             </div>
         </BrowserRouter>
     );

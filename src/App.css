@@ -6,7 +6,7 @@
 .newsBackground {
     background-image: url("https://i.natgeofe.com/n/8a3e578f-346b-479f-971d-29dd99a6b699/nationalgeographic_2751013_16x9.jpg");
     background-position: center;
-    background-size: cover;
+    background-size: auto;
 }
 
 .jumbotronBackground {
