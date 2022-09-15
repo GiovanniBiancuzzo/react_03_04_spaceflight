@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavbarComponent from "./components/NavbarComponent";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NewsPageComponent from "./components/NewsPageComponent";
+import JumbotronComponent from "./components/JumbotronComponent";
+import SingleNewsPageComponent from "./components/SingleNewsPageComponent";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <header className="App-header">
+                    {/* <NavbarComponent /> */}
+                    <JumbotronComponent />
+                    {
+                        //todo: aggiungi una props dal navigate per aggiornae il contenuto del jumbotron
+                    }{" "}
+                    <div className="newsBackground">
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={<NewsPageComponent />}
+                            ></Route>
+                            <Route
+                                path="/:id"
+                                element={<SingleNewsPageComponent />}
+                            ></Route>
+                            {
+                                //todo: aggiungi altre pagine blogs, ecc
+                            }
+                        </Routes>
+                    </div>
+                </header>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

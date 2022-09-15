@@ -1,38 +1,18 @@
 .App {
-  text-align: center;
+    text-align: center;
+    background-color: rgb(100, 100, 194);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.newsBackground {
+    background-image: url("https://i.natgeofe.com/n/8a3e578f-346b-479f-971d-29dd99a6b699/nationalgeographic_2751013_16x9.jpg");
+    background-position: center;
+    background-size: cover;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.jumbotronBackground {
+    background-image: url("https://media-assets.wired.it/photos/615f3a94fca82abbd0eae3a5/master/pass/1533125620_aaa.jpg");
+    background-position: center;
+    background-size: cover;
+    color: azure;
+    text-shadow: 2px 1px #acacac;
 }
